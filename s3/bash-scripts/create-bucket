@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+if [[ -z "$1" ]]; then
+    echo "Error: No bucket name provided. Please enter a Bucket Name."
+    exit 1
+fi
+aws s3api create-bucket --bucket $1
