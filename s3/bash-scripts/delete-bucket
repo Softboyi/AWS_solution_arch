@@ -1,1 +1,10 @@
 #!/usr/bin/bash
+
+if [[ -z "$1" ]];
+ then 
+    echo "Invalid Input! Please enter an S3 Bucket name to delete"
+    exit 1 
+fi
+
+#delete bucket
+aws s3api delete-bucket --bucket "$1"
