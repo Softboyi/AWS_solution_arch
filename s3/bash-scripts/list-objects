@@ -1,3 +1,22 @@
 #!/usr/bin/bash
 
-aws s3api list-objects --bucket "$1" 
+#simply list objects on terminal
+#aws s3api list-objects --bucket "$1" --query Contents[].Key
+
+
+# Check if a bucket name is provided
+if [[ -z "$1" ]]; then
+    echo "Error: No bucket name provided. Usage: $0 <bucket-name>"
+    exit 1
+fi
+
+# List objects and extract only the keys
+object_list=$(aws s3api list-objects --bucket "$1" --query 'Contents[].Key' --output json)
+
+# Format the keys into JSON format
+json_output=$(jq -n --argjson keys "$object_list" '{"Objects": [$keys[] | {Key: .}]}')
+
+# Save to a JSON file
+echo "$json_output" > object-to-delete.json
+
+echo "Object keys have been saved to object-to-delete.json"

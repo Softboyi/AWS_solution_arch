@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+if [[ -z "$1" ]]; 
+then 
+    echo "Invalid Input!, Please enter a valid Bucket name to delete contents"
+    exit 1
+fi
+
+#uncomment line below to delete a single object
+#aws s3api delete-object --bucket "$1" --key "$2"
+
+#to delete multiple objects 
+#you have to create a json file containing the names of the objects you want to delete 
+#pass the json file name as the objects to delete
+aws s3api delete-objects --bucket "$1" --delete file://"$2"
