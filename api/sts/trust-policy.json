@@ -1,0 +1,15 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "STSAssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::812794348925:user/sts-s3-user"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+
+
